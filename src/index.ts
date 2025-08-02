@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 import * as AWS from 'aws-sdk'
-import {formatter} from './format'
+import {formatter} from './format/index.js'
 import {appendFileSync, existsSync, writeFileSync} from 'fs'
-import {GetParametersByPathResult, Parameter} from 'aws-sdk/clients/ssm'
+import {GetParametersByPathResult, Parameter} from 'aws-sdk/clients/ssm.js'
 
 async function run() {
   const region = process.env.AWS_DEFAULT_REGION

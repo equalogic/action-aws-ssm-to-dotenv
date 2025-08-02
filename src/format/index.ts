@@ -1,6 +1,6 @@
-import {formatShell} from './shell'
-import {formatDotenv} from './dotenv'
-import {formatYaml} from './yaml'
+import {formatShell} from './shell.js'
+import {formatDotenv} from './dotenv.js'
+import {formatYaml} from './yaml.js'
 
 export function formatter(type: 'shell' | 'dotenv' | 'yaml' | string) {
   if (type === 'shell') {
