@@ -29,7 +29,8 @@
   "homepage": "https://github.com/deptno/action-aws-ssm-to-dotenv#readme",
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "aws-sdk": "^2.1692.0"
+    "aws-sdk": "^2.1692.0",
+    "tslib": "2.8.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "28.0.6",
