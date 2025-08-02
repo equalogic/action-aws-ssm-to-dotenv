@@ -1,0 +1,15 @@
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import typescript from '@rollup/plugin-typescript';
+
+const config = {
+  input: "src/index.ts",
+  output: {
+    esModule: true,
+    file: "dist/index.js",
+    format: "es",
+    sourcemap: true,
+  },
+  plugins: [nodeResolve({ preferBuiltins: true }), typescript()],
+};
+
+export default config;
