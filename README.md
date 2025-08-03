@@ -1,4 +1,5 @@
 # action aws ssm to dotenv
+
 ![](https://github.com/deptno/action-aws-ssm-to-dotenv/workflows/v1/badge.svg)
 
 create `.env` or **shell script** via AWS SSM parameters path
@@ -24,22 +25,28 @@ create `.env` or **shell script** via AWS SSM parameters path
 ## option
 
 ### ssm-path(required)
+
 AWS Systems Manager > Parameter Store > Path
 
 ### format(default `dotenv`)
-optional, default=dotenv  
-  - dotenv: KEY="value" (default)
-  - shell: export KEY="value"  
-  - yaml: KEY: "value" 
-  
+
+optional, default=dotenv
+
+- dotenv: KEY="value" (default)
+- shell: export KEY="value"
+- yaml: KEY: "value"
+
 ### output(default `.env`)
+
 output filename
 
 ### prefix(optional)
+
 add prefix to exported variable name  
 eg) `prefix: ACTION_` will export `ACTION_ENV_VAR="value"`
 
 ### decryption(optional)
+
 should parameters be decrypted?
 
 [.github/workflows/test.yml](.github/workflows/test.yml)
@@ -47,5 +54,7 @@ should parameters be decrypted?
 ## cabinet
 
 ---
+
 ### License
+
 MIT
