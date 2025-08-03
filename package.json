@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "rollup --config rollup.config.js",
+    "cli": "AWS_SDK_LOAD_CONFIG=1 node dist/cli.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write ."
   },
