@@ -1,7 +1,6 @@
-import * as AWS from 'aws-sdk';
+import { GetParametersByPathResult, Parameter, SSM } from '@aws-sdk/client-ssm';
 import { formatter, isValidFormat } from './format/index.js';
 import { appendFileSync, existsSync, writeFileSync } from 'fs';
-import { GetParametersByPathResult, Parameter } from 'aws-sdk/clients/ssm.js';
 
 export interface SsmToFileArgs {
   region: string;
@@ -24,20 +23,18 @@ export async function ssmToFile({
     throw new Error(`invalid format: ${format}`);
   }
 
-  const ssm = new AWS.SSM({ region });
+  const ssm = new SSM({ region });
 
   const allParameters: Parameter[] = [];
   let nextToken: string | undefined = undefined;
 
   do {
-    const result: GetParametersByPathResult = await ssm
-      .getParametersByPath({
-        WithDecryption: withDecryption,
-        Path: ssmPath,
-        Recursive: true,
-        NextToken: nextToken,
-      })
-      .promise();
+    const result: GetParametersByPathResult = await ssm.getParametersByPath({
+      WithDecryption: withDecryption,
+      Path: ssmPath,
+      Recursive: true,
+      NextToken: nextToken,
+    });
 
     nextToken = result.NextToken;
     allParameters.push(...result.Parameters);
