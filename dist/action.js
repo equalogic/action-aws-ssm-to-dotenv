@@ -1,5 +1,6 @@
 import { c as coreExports } from './_virtual/core.js';
-import { ssmToFile } from './ssm-to-file.js';
+import { outputToFile } from './output-to-file.js';
+import { fetchParameters } from './fetch-parameters.js';
 
 async function run() {
     try {
@@ -10,13 +11,13 @@ async function run() {
         const prefix = coreExports.getInput('prefix');
         const withDecryption = coreExports.getInput('decryption') === 'true';
         try {
-            await ssmToFile({
+            const parameters = await fetchParameters(ssmPath, {
                 region,
-                ssmPath,
-                format,
-                output,
-                prefix,
                 withDecryption,
+            });
+            await outputToFile(parameters, output, {
+                format,
+                prefix,
             });
         }
         catch (e) {

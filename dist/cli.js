@@ -1,5 +1,6 @@
 import parseArgs from './_virtual/index.js';
-import { ssmToFile } from './ssm-to-file.js';
+import { outputToFile } from './output-to-file.js';
+import { fetchParameters } from './fetch-parameters.js';
 
 const USAGE_HELP = 'Usage: ssm-to-file --path <ssm-path> [--region <region>] [--prefix <prefix>] [--format (dotenv|shell|yaml)] [--decrypt] [filename]';
 const cliArgs = parseArgs(process.argv.slice(2), {
@@ -20,12 +21,12 @@ if (!cliArgs.region) {
     console.log(USAGE_HELP);
     process.exit(1);
 }
-await ssmToFile({
-    ssmPath: cliArgs.path,
+const parameters = await fetchParameters(cliArgs.path, {
     region: cliArgs.region,
-    prefix: cliArgs.prefix,
-    format: cliArgs.format,
     withDecryption: cliArgs.decrypt,
-    output: cliArgs._[0] ?? '.env',
+});
+await outputToFile(parameters, cliArgs._[0] ?? '.env', {
+    format: cliArgs.format,
+    prefix: cliArgs.prefix,
 });
 //# sourceMappingURL=cli.js.map

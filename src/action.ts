@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
-import { ssmToFile } from './ssm-to-file.js';
+import { outputToFile } from './output-to-file.js';
+import { fetchParameters } from './fetch-parameters.js';
 
 async function run() {
   try {
@@ -11,13 +12,14 @@ async function run() {
     const withDecryption = core.getInput('decryption') === 'true';
 
     try {
-      await ssmToFile({
+      const parameters = await fetchParameters(ssmPath, {
         region,
-        ssmPath,
-        format,
-        output,
-        prefix,
         withDecryption,
+      });
+
+      await outputToFile(parameters, output, {
+        format,
+        prefix,
       });
     } catch (e) {
       core.error(e);
