@@ -17,7 +17,7 @@ async function run() {
             });
             if (format === 'github-actions') {
                 parameters.forEach(p => {
-                    coreExports.exportVariable(p.Name, p.Value);
+                    coreExports.exportVariable(prefix + p.Name.split('/').pop(), p.Value);
                 });
             }
             else {

@@ -19,7 +19,7 @@ async function run() {
 
       if (format === 'github-actions') {
         parameters.forEach(p => {
-          core.exportVariable(p.Name, p.Value);
+          core.exportVariable(prefix + p.Name.split('/').pop(), p.Value);
         });
       } else {
         await outputToFile(parameters, output, {
