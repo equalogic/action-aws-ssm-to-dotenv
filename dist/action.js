@@ -6,8 +6,8 @@ async function run() {
     try {
         const region = process.env.AWS_DEFAULT_REGION;
         const ssmPath = coreExports.getInput('ssm-path', { required: true });
-        const format = coreExports.getInput('format', { required: true });
-        const output = coreExports.getInput('output', { required: true });
+        const format = coreExports.getInput('format') || 'github-actions';
+        const output = coreExports.getInput('output') || '.env';
         const prefix = coreExports.getInput('prefix');
         const withDecryption = coreExports.getInput('decryption') === 'true';
         try {
