@@ -9,12 +9,11 @@ inputs:
     description: 'required. AWS SSM path for parameters eg. `/ssm/parameter`'
     required: true
   format:
-    description: 'dotenv(KEY=value), shell(export KEY=value)'
-    default: 'dotenv'
+    description: 'Output formats: dotenv(KEY=value), shell(export KEY=value), yaml(KEY: VALUE). The default value (github-actions) uses GitHub Actions core library to export variables directly.'
+    default: 'github-actions'
     required: false
   output:
     description: 'output filename'
-    default: '.env'
     required: false
   prefix:
     description: 'if `prefix:ACTION_` ssm:/dev/client_id -> ACTION_CLIENT_ID'
