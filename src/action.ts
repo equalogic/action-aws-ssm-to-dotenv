@@ -17,10 +17,16 @@ async function run() {
         withDecryption,
       });
 
-      await outputToFile(parameters, output, {
-        format,
-        prefix,
-      });
+      if (format === 'github-actions') {
+        parameters.forEach(p => {
+          core.exportVariable(p.Name, p.Value);
+        });
+      } else {
+        await outputToFile(parameters, output, {
+          format,
+          prefix,
+        });
+      }
     } catch (e) {
       core.error(e);
       core.setFailed(e.message);
